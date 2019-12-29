@@ -14,6 +14,9 @@ readonly TMP_DIR="${HOME}/qemu_vms"
 readonly RPI_KERNEL="${TMP_DIR}/kernel-qemu-4.19.50-buster"
 readonly PTB_FILE="${TMP_DIR}/versatile-pb.dtb"
 
+command -v brew &> /dev/null || \
+  ( echo 'Install homebrew' ; exit 1 )
+
 ( mkdir -p "$TMP_DIR" && \
   cd "$TMP_DIR" ) || \
   exit 1

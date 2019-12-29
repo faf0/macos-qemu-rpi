@@ -4,6 +4,9 @@ Bash scripts to run Raspbian (ARM architecture) on macOS Catalina using QEMU
 
 # Installation
 
+Install [homebrew](https://brew.sh/), if you haven't already.
+Next, run the following script:
+
 ```bash
 ./install.sh
 ```
