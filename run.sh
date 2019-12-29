@@ -2,6 +2,9 @@
 
 set -euxo pipefail
 
+[[ "$(uname)" = 'Darwin' ]] || \
+  ( echo 'Must be run on macOS' ; exit 1 )
+
 readonly QEMU=$(which qemu-system-arm)
 
 [[ -z "$QEMU" ]] && \
