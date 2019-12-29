@@ -20,6 +20,22 @@ Next, run the following script:
 This script doesn't require macOS, but the Raspbian image/kernel and QEMU are
 required.
 
+Note that this scripts forwards port TCP/5022 on the host (e.g., macOS) to port
+TCP/22 on the Raspbian guest where Raspbian's SSH server is listening.
+To run Raspbian in QEMU, no other application including Raspbian may listen on
+port TCP/5022 on the host.
+
+# Logging into Raspbian
+
+Either log in via the QEMU window or use SSH:
+```bash
+ssh pi@127.0.0.1 -p 5022
+```
+
+# Shutting Down Raspbian
+
+Log into Raspbian, and then execute `sudo halt` in the Raspbian shell.
+
 # Tutorials
 
 Advanced configuration instructions under Raspbian are provided at
