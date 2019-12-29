@@ -17,6 +17,9 @@ Next, run the following script:
 ./run.sh
 ```
 
+This script doesn't require macOS, but the Raspbian image/kernel and QEMU are
+required.
+
 # Tutorials
 
 Advanced configuration instructions under Raspbian are provided at
