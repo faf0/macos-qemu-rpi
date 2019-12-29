@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Source:
-# https://gist.github.com/hfreire/5846b7aa4ac9209699ba#gistcomment-3075728
-
 set -euxo pipefail
 
 readonly QEMU=$(which qemu-system-arm)
