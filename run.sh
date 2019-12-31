@@ -10,7 +10,7 @@ readonly PTB_FILE="${TMP_DIR}/versatile-pb.dtb"
 
 has_qemu () {
   command -v "$QEMU_SYS" &> /dev/null || \
-    ( echo 'Install QEMU' ; exit 1 )
+    { echo 'Install QEMU'; exit 1; }
 }
 
 run_qemu () {

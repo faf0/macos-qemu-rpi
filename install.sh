@@ -12,17 +12,17 @@ readonly RPI_KERNEL="${TMP_DIR}/kernel-qemu-4.19.50-buster"
 readonly PTB_FILE="${TMP_DIR}/versatile-pb.dtb"
 
 check_commands () {
-  [[ "$(uname)" = 'Darwin' ]] || \
-    ( echo 'Must be run on macOS' ; exit 1 )
+  [ "$(uname)" = 'Darwin' ] || \
+    { echo 'Must be run on macOS'; exit 1; }
   
   command -v brew &> /dev/null || \
-    ( echo 'Install homebrew' ; exit 1 )
+    { echo 'Install homebrew'; exit 1; }
   
   command -v curl &> /dev/null || \
-    ( echo 'Install curl' ; exit 1 )
+    { echo 'Install curl'; exit 1; }
   
   command -v unzip &> /dev/null || \
-    ( echo 'Install unzip' ; exit 1 )
+    { echo 'Install unzip'; exit 1; }
 }
 
 install_qemu () {
@@ -31,19 +31,19 @@ install_qemu () {
 }
 
 change_dir () {
-  ( mkdir -p "$TMP_DIR" && \
-    cd "$TMP_DIR" ) || \
+  { mkdir -p "$TMP_DIR" && \
+    cd "$TMP_DIR"; } || \
     exit 1
 }
 
 exctract_images () {
-  [[ -f "$RPI_KERNEL" ]] || \
+  [ -f "$RPI_KERNEL" ] || \
     curl -sSL "$KERNEL_URL" -o "$RPI_KERNEL"
-  [[ -f "$PTB_FILE" ]] || \
+  [ -f "$PTB_FILE" ] || \
     curl -sSL "$PTB_URL" -o "$PTB_FILE"
-  [[ -f "$IMAGE_FILE" ]] || \
+  [ -f "$IMAGE_FILE" ] || \
     curl -sSL "$IMAGE_URL" -o "$IMAGE_FILE"
-  [[ -f "${IMAGE_FILE%.*}.img" ]] || \
+  [ -f "${IMAGE_FILE%.*}.img" ] || \
     unzip "$IMAGE_FILE"
 }
 
