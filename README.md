@@ -32,6 +32,11 @@ Either log in via the QEMU window or use SSH:
 ssh pi@127.0.0.1 -p 5022
 ```
 
+To get a root shell, run the following:
+```bash
+sudo bash
+```
+
 # Shutting Down Raspbian
 
 Log into Raspbian, and then execute `sudo halt` in the Raspbian shell.
