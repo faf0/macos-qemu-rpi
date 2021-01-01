@@ -35,8 +35,10 @@ port TCP/5022 on the host.
 
 Either log in via the QEMU window or use SSH:
 ```bash
-ssh pi@127.0.0.1 -p 5022
+ssh -F /dev/null -o "PreferredAuthentications password" -o "PasswordAuthentication yes" -p 5022 pi@127.0.0.1
 ```
+
+If sshd failed to start, log in via the QEMU window and run `sudo service ssh restart`.
 
 To get a root shell, run the following:
 ```bash
