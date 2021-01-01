@@ -38,7 +38,8 @@ Either log in via the QEMU window or use SSH:
 ssh -F /dev/null -o "PreferredAuthentications password" -o "PasswordAuthentication yes" -p 5022 pi@127.0.0.1
 ```
 
-If sshd failed to start, log in via the QEMU window and run `sudo service ssh restart`.
+If you can't connect, sshd probably failed to start in QEMU.
+In this case, log in via the QEMU window and run `sudo service ssh restart` to restart sshd in QEMU.
 
 To get a root shell, run the following:
 ```bash
