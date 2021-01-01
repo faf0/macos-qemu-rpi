@@ -2,11 +2,16 @@
 
 set -euxo pipefail
 
-readonly QEMU_SYS='qemu-system-arm'
+readonly IMAGE='2020-02-13-raspbian-buster-lite'
+readonly KERNEL='kernel-qemu-5.4.51-buster'
+readonly PTB='versatile-pb-buster-5.4.51.dtb'
+
 readonly TMP_DIR="${HOME}/qemu_vms"
-readonly RPI_KERNEL="${TMP_DIR}/kernel-qemu-4.19.50-buster"
-readonly RPI_FS="${TMP_DIR}/2019-09-26-raspbian-buster-lite.img"
-readonly PTB_FILE="${TMP_DIR}/versatile-pb.dtb"
+readonly IMAGE_FILE="${TMP_DIR}/${IMAGE}.img"
+readonly KERNEL_FILE="${TMP_DIR}/${KERNEL}"
+readonly PTB_FILE="${TMP_DIR}/${PTB}"
+
+readonly QEMU_SYS='qemu-system-arm'
 
 has_qemu () {
   command -v "$QEMU_SYS" &> /dev/null || \
@@ -14,12 +19,19 @@ has_qemu () {
 }
 
 run_qemu () {
-  "$QEMU_SYS" -kernel "$RPI_KERNEL" \
-    -cpu arm1176 -m 256 -M versatilepb \
+  "$QEMU_SYS" \
+    -cpu arm1176 \
+    -m 256 \
+    -M versatilepb \
+    -serial stdio \
+    -drive "file=${IMAGE_FILE},if=none,index=0,media=disk,format=raw,id=disk0" \
+    -device 'virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off' \
+    -net 'user,hostfwd=tcp::5022-:22' \
+    -net nic \
     -dtb "$PTB_FILE" -no-reboot \
-    -serial stdio -append 'root=/dev/sda2 panic=1 rootfstype=ext4 rw' \
-    -drive "file=${RPI_FS},index=0,media=disk,format=raw" \
-    -net user,hostfwd=tcp::5022-:22 -net nic
+    -kernel "$KERNEL_FILE" \
+    -append 'root=/dev/vda2 panic=1' \
+    -no-reboot
 }
 
 main () {

@@ -2,6 +2,12 @@
 
 Bash scripts to run Raspbian (ARM architecture) on macOS Catalina using QEMU
 
+# Note on Native Emulation Alternative
+
+As of October 2020, consider leveraging QEMU's native emulation of the Raspi2/3 that became available instead of running the scripts in this repository.
+
+See https://github.com/dhruvvyas90/qemu-rpi-kernel/tree/master/native-emuation for instructions on how to use QEMU's native emulation.
+
 # Installation
 
 Install [homebrew](https://brew.sh/), if you haven't already.
@@ -36,6 +42,8 @@ To get a root shell, run the following:
 ```bash
 sudo bash
 ```
+
+Note that no desktop manager is running.
 
 # Shutting Down Raspbian
 

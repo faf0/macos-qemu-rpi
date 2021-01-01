@@ -2,14 +2,20 @@
 
 set -euxo pipefail
 
-readonly IMAGE_FILE='2019-09-26-raspbian-buster-lite.zip'
-readonly IMAGE_URL="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2019-09-30/${IMAGE_FILE}"
-readonly KERNEL_URL='https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/c5a491c093604a71db2f01b8fab72bad0e96e2b5/kernel-qemu-4.19.50-buster?raw=true'
-readonly PTB_URL='https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/ea19dc94bc7420675b505c81d2c262ee0eacbb0e/versatile-pb.dtb?raw=true'
+readonly IMAGE='2020-02-13-raspbian-buster-lite'
+readonly KERNEL='kernel-qemu-5.4.51-buster'
+readonly PTB='versatile-pb-buster-5.4.51.dtb'
+
+# commit hash to use for the https://github.com/dhruvvyas90/qemu-rpi-kernel/ repo:
+readonly COMMIT_HASH='061a3853cf2e2390046d163d90181bde1c4cd78f'
+
+readonly IMAGE_URL="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/${IMAGE}.zip"
+readonly KERNEL_URL="https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/${COMMIT_HASH}/${KERNEL}?raw=true"
+readonly PTB_URL="https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/${COMMIT_HASH}/${PTB}?raw=true"
 
 readonly TMP_DIR="${HOME}/qemu_vms"
-readonly RPI_KERNEL="${TMP_DIR}/kernel-qemu-4.19.50-buster"
-readonly PTB_FILE="${TMP_DIR}/versatile-pb.dtb"
+readonly KERNEL_FILE="${TMP_DIR}/${KERNEL}"
+readonly PTB_FILE="${TMP_DIR}/${PTB}"
 
 check_commands () {
   [ "$(uname)" = 'Darwin' ] || \
@@ -37,14 +43,14 @@ change_dir () {
 }
 
 exctract_images () {
-  [ -f "$RPI_KERNEL" ] || \
-    curl -sSL "$KERNEL_URL" -o "$RPI_KERNEL"
+  [ -f "$KERNEL_FILE" ] || \
+    curl -sSL "$KERNEL_URL" -o "$KERNEL_FILE"
   [ -f "$PTB_FILE" ] || \
     curl -sSL "$PTB_URL" -o "$PTB_FILE"
-  [ -f "$IMAGE_FILE" ] || \
-    curl -sSL "$IMAGE_URL" -o "$IMAGE_FILE"
-  [ -f "${IMAGE_FILE%.*}.img" ] || \
-    unzip "$IMAGE_FILE"
+  [ -f "${IMAGE}.zip" ] || \
+    curl -sSL "$IMAGE_URL" -o "${IMAGE}.zip"
+  [ -f "${IMAGE}.img" ] || \
+    unzip "${IMAGE}.zip"
 }
 
 main () {
