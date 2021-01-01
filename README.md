@@ -43,7 +43,8 @@ To get a root shell, run the following:
 sudo bash
 ```
 
-Note that no desktop manager is running.
+Note that no desktop manager is running, as the "Lite" image is used.
+See https://www.raspberrypi.org/software/operating-systems/ for pointers to other images.
 
 # Shutting Down Raspbian
 
