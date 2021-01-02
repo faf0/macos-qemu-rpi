@@ -23,17 +23,17 @@ run_qemu () {
     -m 1G \
     -M raspi3 \
     -smp 4 \
-    -serial stdio \
     -usb \
     -device usb-mouse \
     -device usb-kbd \
+    -device 'usb-net,netdev=net0' \
+    -netdev 'user,id=net0,hostfwd=tcp::5022-:22' \
     -sd "$IMAGE_FILE" \
-    -net 'user,hostfwd=tcp::5022-:22' \
-    -net nic \
     -dtb "$PTB_FILE" \
     -kernel "$KERNEL_FILE" \
     -append 'rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1' \
-    -no-reboot
+    -no-reboot \
+    -nographic
 } 
 
 main () {
