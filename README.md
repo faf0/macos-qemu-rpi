@@ -5,10 +5,10 @@ Bash scripts to run Raspbian (ARM architecture) on macOS Catalina using QEMU
 # Note on Native Emulation Alternative
 
 As of October 2020, consider leveraging QEMU's native emulation of the Raspi2/3 that became available instead of running the scripts in this directory.
-Navigate to the native-emulation/ directory to try native emulation.
+Navigate to the `native-emulation/` directory to try native emulation.
 QEMU version 5.1 or higher is required.
 
-See https://github.com/dhruvvyas90/qemu-rpi-kernel/tree/master/native-emuation for background information on the use QEMU's native emulation.
+See https://github.com/dhruvvyas90/qemu-rpi-kernel/tree/master/native-emuation for background information on the use of QEMU's native emulation.
 
 # Installation
 
