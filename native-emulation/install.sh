@@ -51,7 +51,7 @@ extract_images () {
     curl -sSL "$IMAGE_URL" -o "${IMAGE}.zip"
   [ -f "${IMAGE}.img" ] || \
     unzip "${IMAGE}.zip"
-  [ -f "${IMAGE}.img" ] || \
+  [ -f "${IMAGE}.img" ] && \
     qemu-img resize -f raw "${IMAGE}.img" 2G
 }
 
