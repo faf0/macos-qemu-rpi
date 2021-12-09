@@ -28,7 +28,7 @@ run_qemu () {
     -device usb-kbd \
     -device 'usb-net,netdev=net0' \
     -netdev 'user,id=net0,hostfwd=tcp::5022-:22' \
-    -sd "$IMAGE_FILE" \
+    -drive "file=$IMAGE_FILE,index=0,format=raw" \
     -dtb "$PTB_FILE" \
     -kernel "$KERNEL_FILE" \
     -append 'rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1' \
