@@ -21,7 +21,7 @@ has_qemu () {
 run_qemu () {
   "$QEMU_SYS" \
     -m 1G \
-    -M raspi3 \
+    -M raspi3b \
     -smp 4 \
     -usb \
     -device usb-mouse \
