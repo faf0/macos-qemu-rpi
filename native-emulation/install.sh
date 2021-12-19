@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-readonly IMAGE='2020-02-13-raspbian-buster-lite'
+readonly IMAGE='2020-08-20-raspios-buster-armhf-lite'
 readonly KERNEL='kernel8.img'
 readonly PTB='bcm2710-rpi-3-b-plus.dtb'
 
@@ -13,7 +13,7 @@ readonly PTB_FILE="${TMP_DIR}/${PTB}"
 # commit hash to use for the https://github.com/dhruvvyas90/qemu-rpi-kernel/ repo:
 readonly COMMIT_HASH='c522bff346bb7401ad0b979778c23be52089618f'
 
-readonly IMAGE_URL="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/${IMAGE}.zip"
+readonly IMAGE_URL="https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2020-08-24/${IMAGE}.zip"
 readonly KERNEL_URL="https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/${COMMIT_HASH}/native-emulation/5.4.51%20kernels/${KERNEL}?raw=true"
 readonly PTB_URL="https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/${COMMIT_HASH}/native-emulation/dtbs/${PTB}?raw=true"
 
@@ -51,7 +51,7 @@ extract_images () {
     curl -sSL "$IMAGE_URL" -o "${IMAGE}.zip"
   [ -f "${IMAGE}.img" ] || \
     unzip "${IMAGE}.zip"
-  [ -f "${IMAGE}.img" ] || \
+  [ -f "${IMAGE}.img" ] && \
     qemu-img resize -f raw "${IMAGE}.img" 2G
 }
 

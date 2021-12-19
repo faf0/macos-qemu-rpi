@@ -2,14 +2,14 @@
 
 set -euxo pipefail
 
-readonly IMAGE='2020-02-13-raspbian-buster-lite'
+readonly IMAGE='2020-08-20-raspios-buster-armhf-lite'
 readonly KERNEL='kernel8.img'
-readonly PTB='bcm2710-rpi-3-b-plus.dtb'
+readonly DTB='bcm2710-rpi-3-b-plus.dtb'
 
 readonly TMP_DIR="${HOME}/qemu_vms_native"
 readonly IMAGE_FILE="${TMP_DIR}/${IMAGE}.img"
 readonly KERNEL_FILE="${TMP_DIR}/${KERNEL}"
-readonly PTB_FILE="${TMP_DIR}/${PTB}"
+readonly DTB_FILE="${TMP_DIR}/${DTB}"
 
 readonly QEMU_SYS='qemu-system-aarch64'
 
@@ -28,8 +28,8 @@ run_qemu () {
     -device usb-kbd \
     -device 'usb-net,netdev=net0' \
     -netdev 'user,id=net0,hostfwd=tcp::5022-:22' \
-    -sd "$IMAGE_FILE" \
-    -dtb "$PTB_FILE" \
+    -drive "file=${IMAGE_FILE},index=0,format=raw" \
+    -dtb "$DTB_FILE" \
     -kernel "$KERNEL_FILE" \
     -append 'rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1' \
     -no-reboot \
